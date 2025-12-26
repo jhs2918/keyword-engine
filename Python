@@ -1,0 +1,30 @@
+from flask import Flask, request, jsonify
+from modules.autoComplete import get_auto
+from modules.related import get_related
+from modules.intentExpand import expand_intent
+from modules.ngram import get_ngram
+from modules.score import score_keywords
+
+app = Flask(__name__)
+
+@app.route("/analyze")
+def analyze():
+    kw = request.args.get("kw")
+
+    auto = get_auto(kw)
+    related = get_related(kw)
+    intent = expand_intent(kw)
+    ngram = get_ngram(kw)
+
+    merged = list(set(auto + related + intent + ngram))
+    ranked = score_keywords(merged)
+
+    return jsonify({
+        "auto": auto,
+        "related": related,
+        "intent": intent,
+        "ngram": ngram,
+        "top": ranked
+    })
+
+app.run(host="127.0.0.1", port=5000)

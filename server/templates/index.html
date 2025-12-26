@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>키워드 분석기</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<h1>키워드 분석기</h1>
+
+<div class="bar">
+  <input id="kw" placeholder="키워드 입력" />
+  <button onclick="analyze()">분석</button>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>키워드</th>
+  <th>블로그 경쟁</th>
+  <th>상위가능성</th>
+  <th>추천</th>
+</tr>
+</thead>
+<tbody id="result"></tbody>
+</table>
+
+<script>
+async function analyze(){
+  const kw = document.getElementById("kw").value.trim();
+  if(!kw) return;
+
+  const r = await fetch("/analyze", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({kw})
+  });
+  const data = await r.json();
+
+  const tbody = document.getElementById("result");
+  tbody.innerHTML = "";
+
+  data.forEach(x=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${x.키워드}</td>
+      <td>${x.블로그경쟁}</td>
+      <td>${x.상위가능성}</td>
+      <td>${x.추천 || ""}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+</script>
+</body>
+</html>

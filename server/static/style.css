@@ -1,0 +1,14 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif; margin: 24px; }
+h1 { font-size: 56px; margin: 0 0 18px 0; }
+.bar { display:flex; align-items:center; gap:12px; margin: 10px 0 24px 0; }
+input { width: 640px; font-size: 28px; padding: 16px 14px; border: 2px solid #999; border-radius: 6px; }
+button { font-size: 28px; padding: 14px 18px; border: 2px solid #999; background: #f4f4f4; border-radius: 6px; cursor:pointer; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+.status { font-size: 22px; margin-left: 10px; }
+.status.loading { color: #d00; }
+
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 2px solid #333; padding: 18px 18px; font-size: 28px; }
+th { background: #eee; }
+td.err { color: #d00; font-size: 18px; white-space: pre-wrap; }
+tr:hover { background: #fafafa; }
