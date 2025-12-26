@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-import sys
+
 import os
 
-# 프로젝트 루트 경로 추가 (Render 필수)
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
-from modules.analyzer import analyze_keyword  # ⭐ 이 줄이 빠져 있었음
+from server.modules.analyzer import analyze_keyword
 
 app = Flask(__name__)
 

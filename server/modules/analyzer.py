@@ -1,6 +1,7 @@
-from modules.keywordExpand import expand_keywords
-from modules.blogCount import get_blog_count
-from modules.demandScore import calc_score
+from server.modules.keywordExpand import expand_keywords
+from server.modules.blogCount import get_blog_count
+from server.modules.demandScore import calc_score
+
 
 def analyze_keyword(keyword: str):
     keywords = expand_keywords(keyword)
@@ -17,6 +18,7 @@ def analyze_keyword(keyword: str):
                 "상위가능성": score,
                 "추천": "★" if score >= 80 else ""
             })
+
         except Exception as e:
             results.append({
                 "키워드": kw,
